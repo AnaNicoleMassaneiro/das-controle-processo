@@ -38,11 +38,17 @@ export class ListClientComponent implements OnInit {
   }
 
   onEdit(index: number) {
-    this.router.navigate(['/registration-client', index]);
+    this.router.navigate(["/registration-client", index]);
   }
 
   onDelete(index: number) {
-    this.registrations.splice(index, 1);
+    this.clientService.delete(index).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate(["/list-client"]);
+      },
+      error: (e) => console.error(e),
+    });
   }
 
   onCancel() {
