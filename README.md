@@ -1,27 +1,69 @@
-# DasControleProcesso
+#Pós-graduação em desenvolvimento ágil de software
+DAS - Trabalho Desenvolvimento Web 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
+Com base no diagrama de classes abaixo, construa um sistema para controlar o processo de pedido de produtos.
 
-## Development server
+O sistema tem os seguintes requisitos:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Uma tela para manter (incluir, atualizar, excluir e listar) os clientes da empresa (Nome, sobrenome, CPF)
 
-## Code scaffolding
+a. Nesta tela deve ser possível listar todos os clientes
+b. Deve ser possível atualizar os dados de um cliente.
+c. Deve ser possível excluir um cliente que não possua pedidos. Se houver uma tentativa de exclusão de clientes com pedidos uma mensagem do sistema deve informar ao usuário que o cliente não pode ser excluído.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. Uma tela simples para manter os produtos disponíveis.
 
-## Build
+3. Uma tela para incluir os pedidos novos quando são comprados
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+a. Um campo para informar o CPF do cliente (O CPF deve ser único)
+b. Uma lista de produtos (descrição)
+c. Uma maneira para selecionar um produto
+d. Um botão para incluir o produto selecionado no pedido do cliente, informando a quantidade do produto.
 
-## Running unit tests
+4. Uma tela para listar o pedido de um cliente.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+a. Um campo para informar o CPF do cliente.
+b. Um botão para listar os itens do pedido do cliente
+c. Uma tabela para mostrar os itens do pedido:
 
-## Running end-to-end tests
+Produto
+Quantidade
+Papel A4
+2
+Caneta esferográfica azul
+20
+Pasta
+2
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+5. Considere as seguintes tabelas do banco de dados:
+
+
+
+O programa acima deve utilizar as seguintes tecnologias:
+
+- HTML/CSS/Javascript/DOM
+- Angular
+- Servidor rodando uma API REST em Spring 
+- É permitido o uso de frameworks adicionais
+- Não é permitido o uso de frameworks geradores de código, como por exemplo, Spring Roo
+
+Elemento de Pesquisa:
+
+	- Espera-se que a equipe consiga montar uma API REST simples em Spring
+- O servidor pode rodar localmente
+- Tutoriais e vídeos estão disponibilizados na página: http://www.razer.net.br/angular
+
+Itens para serem entregues:
+
+1. Código fonte (remover as bibliotecas e arquivos desnecessários para diminuir o tamanho da entrega)
+2. Script para criação do banco de dados
+3. Entrega toda no MOODLE
+
+Avaliação:
+
+- Equipes de seis pessoas no máximo
+- Material entregue
+- Qualidade do software (bugs encontrados na defesa)
+- Defesa do código e a nota será individual, considerando a defesa
