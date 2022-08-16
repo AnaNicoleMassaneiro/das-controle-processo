@@ -19,7 +19,6 @@ export class ListClientComponent implements OnInit {
   constructor(private router: Router, private clientService: ClientService) {}
 
   ngOnInit() {
-    console.log("");
     this.listClients();
   }
 
@@ -39,11 +38,7 @@ export class ListClientComponent implements OnInit {
   }
 
   onEdit(index: number) {
-    this.selectedRow = index;
-    this.regModel = new ClientModel();
-    this.regModel = Object.assign({}, this.registrations[this.selectedRow]);
-    this.submitType = "Update";
-    this.showNew = true;
+    this.router.navigate(['/registration-client', index]);
   }
 
   onDelete(index: number) {

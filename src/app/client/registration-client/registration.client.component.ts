@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ClientModel } from "src/app/models/client.model";
@@ -15,37 +16,59 @@ export class RegistrationClientComponent implements OnInit {
   public showNew: Boolean = false;
   public submitType: string = "Salvar";
   public selectedRow!: number;
+  public idEdit!: number;
+  public message = "";
 
-  constructor(public clientService: ClientService) {}
+  constructor(
+    public clientService: ClientService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.onNew();
+    this.verifyRoute();
+  }
+
+  verifyRoute() {
+    const routeParams = this.route.snapshot.paramMap;
+
+    this.idEdit = Number(routeParams.get("id"));
+
+    this.verifyIsNew();
   }
 
   onSave() {
-    this.newSave();
-  /*   if (this.submitType === "Salvar") {
-      this.newSave();
+    if (this.idEdit) {
+     this.editSave();
     } else {
-      this.registrations[this.selectedRow].name = this.regModel.name;
-      this.registrations[this.selectedRow].sobrenome = this.regModel.sobrenome;
-      this.registrations[this.selectedRow].cpf = this.regModel.cpf;
-    } */
+      this.newSave();
+    }
 
     this.showNew = false;
   }
 
-  onNew() {
-    this.regModel = new ClientModel();
-    this.submitType = "Save";
-    this.showNew = true;
+  verifyIsNew() {
+    if (this.idEdit) {
+      this.searchRegistry();
+    } else {
+      this.regModel = new ClientModel();
+      this.submitType = "Save";
+      this.showNew = true;
+    }
+  }
+
+  searchRegistry() {
+    this.clientService.get(this.idEdit).subscribe({
+      next: (data) => {
+        this.regModel = data;
+      },
+      error: (e) => console.error(e),
+    });
   }
 
   newSave() {
-    console.log(this.regModel);
     const data = {
       name: this.regModel.name,
-      sabrenome: this.regModel.sobrenome,
+      sobrenome: this.regModel.sobrenome,
       cpf: this.regModel.cpf,
     };
 
@@ -56,6 +79,27 @@ export class RegistrationClientComponent implements OnInit {
       },
       error: (e) => console.error(e),
     });
+  }
+
+  editSave() {
+    const data = {
+      id: this.idEdit,
+      name: this.regModel.name,
+      sobrenome: this.regModel.sobrenome,
+      cpf: this.regModel.cpf,
+    };
+
+    this.clientService
+      .update(data)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.message = res.message
+            ? res.message
+            : "This tutorial was updated successfully!";
+        },
+        error: (e) => console.error(e),
+      });
   }
 
   onCancel() {
