@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from "./home/home.component";
 import { ListClientComponent } from "./client/list-client/list-client.component";
 import { RegistrationClientComponent } from "./client/registration-client/registration.client.component";
 
