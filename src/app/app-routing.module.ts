@@ -4,6 +4,7 @@ import { ListClientComponent } from "./client/view/list-client/list-client.compo
 import { RegistrationClientComponent } from "./client/view/registration-client/registration.client.component";
 import { ListProductComponent } from "./product/view/list-product/list-product.component";
 import { RegistrationProductComponent } from "./product/view/registration-product/registration.product.component";
+import { ListOrderComponent } from "./order/view/list-order/list-order.component";
 
 const routes: Routes = [
   { path: "", component: ListClientComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: "list-product", component: ListProductComponent },
   { path: "registration-product", component: RegistrationProductComponent },
   { path: "registration-product/:id", component: RegistrationProductComponent },
+  { path: "list-order", component: ListOrderComponent },
 ];
 
 @NgModule({

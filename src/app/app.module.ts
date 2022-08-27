@@ -12,6 +12,8 @@ import { RegistrationClientComponent } from "./client/view/registration-client/r
 import { ListProductComponent } from "./product/view/list-product/list-product.component";
 import { RegistrationProductComponent } from "./product/view/registration-product/registration.product.component";
 import { ModalComponent } from "./modal/modal.component";
+import { RegistrationOrderComponent } from './order/view/registration-order/registration-order.component';
+import { ListOrderComponent } from './order/view/list-order/list-order.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { ModalComponent } from "./modal/modal.component";
     ListProductComponent,
     RegistrationProductComponent,
     ModalComponent,
+    RegistrationOrderComponent,
+    ListOrderComponent,
   ],
   imports: [
     BrowserModule,
