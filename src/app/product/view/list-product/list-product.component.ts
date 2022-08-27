@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ProductModel } from "src/app/product/models/product.model";
 import { ProductService } from "../../services/product.service";
 
@@ -16,7 +17,10 @@ export class ListProductComponent implements OnInit {
   public selectedRow!: number;
   public product?: ProductModel[];
 
-  constructor(private router: Router, private productService: ProductService) {}
+  constructor(
+    private router: Router,
+    private productService: ProductService,
+  ) {}
 
   ngOnInit() {
     this.listProducts();
@@ -58,4 +62,6 @@ export class ListProductComponent implements OnInit {
   callModal() {
     this.router.navigate(["/registration-product"]);
   }
+
+
 }

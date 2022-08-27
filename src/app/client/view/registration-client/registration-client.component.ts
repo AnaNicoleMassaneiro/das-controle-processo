@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbModal,
+  ModalDismissReasons,
+  NgbActiveModal,
+} from "@ng-bootstrap/ng-bootstrap";
 import { ClientModel } from "src/app/client/models/client.model";
 import { ClientService } from "src/app/client/services/client.service";
 
@@ -22,12 +26,16 @@ export class RegistrationClientComponent implements OnInit {
   constructor(
     public clientService: ClientService,
     private route: ActivatedRoute,
-    private modalService: NgbModal,
-    private router: Router
+    public activeModal: NgbActiveModal,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
     this.verifyRoute();
+  }
+
+  open(content: any) {
+    this.modalService.open(content);
   }
 
   verifyRoute() {
@@ -76,12 +84,9 @@ export class RegistrationClientComponent implements OnInit {
 
     this.clientService.create(data).subscribe({
       next: (res) => {
-        this.sucessSave();
+        this.open('teste');
       },
-      error: (e) => {
-        this.errorSave();
-        console.error(e);
-      },
+      error: (e) => console.error(e),
     });
   }
 
@@ -95,32 +100,16 @@ export class RegistrationClientComponent implements OnInit {
 
     this.clientService.update(data).subscribe({
       next: (res) => {
-        this.sucessSave();
+        console.log(res);
         this.message = res.message
           ? res.message
           : "This tutorial was updated successfully!";
       },
-      error: (e) => {
-        this.errorSave();
-        console.error(e);
-      },
+      error: (e) => console.error(e),
     });
   }
 
   onCancel() {
     this.showNew = false;
-  }
-
-  sucessSave() {
-    this.modalService.open("Sucesso ao Salvar Cliente", {
-      ariaLabelledBy: "modal-basic-title",
-    });
-    this.router.navigate(["/list-client"]);
-  }
-
-  errorSave() {
-    this.modalService.open("Erro ao Salvar produto", {
-      ariaLabelledBy: "modal-basic-title",
-    });
   }
 }

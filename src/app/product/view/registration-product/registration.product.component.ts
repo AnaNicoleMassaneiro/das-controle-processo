@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 import { ProductModel } from "src/app/product/models/product.model";
 import { ProductService } from "src/app/product/services/product.service";
@@ -20,7 +21,9 @@ export class RegistrationProductComponent implements OnInit {
 
   constructor(
     public productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -37,7 +40,7 @@ export class RegistrationProductComponent implements OnInit {
 
   onSave() {
     if (this.idEdit) {
-     this.editSave();
+      this.editSave();
     } else {
       this.newSave();
     }
@@ -71,10 +74,12 @@ export class RegistrationProductComponent implements OnInit {
 
     this.productService.create(data).subscribe({
       next: (res) => {
-        console.log(res);
-        //this.submitted = true;
+        this.sucessSave();
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        this.errorSave();
+        console.error(e);
+      },
     });
   }
 
@@ -84,20 +89,34 @@ export class RegistrationProductComponent implements OnInit {
       descricao: this.regModel.descricao,
     };
 
-    this.productService
-      .update(data)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.message = res.message
-            ? res.message
-            : "This tutorial was updated successfully!";
-        },
-        error: (e) => console.error(e),
-      });
+    this.productService.update(data).subscribe({
+      next: (res) => {
+        this.sucessSave();
+        this.message = res.message
+          ? res.message
+          : "This tutorial was updated successfully!";
+      },
+      error: (e) => {
+        console.error(e);
+        this.errorSave();
+      },
+    });
   }
 
   onCancel() {
     this.showNew = false;
+  }
+
+  sucessSave() {
+    this.modalService.open("Sucesso ao Salvar produto", {
+      ariaLabelledBy: "modal-basic-title",
+    });
+    this.router.navigate(["/list-client"]);
+  }
+
+  errorSave() {
+    this.modalService.open("Erro ao Salvar produto", {
+      ariaLabelledBy: "modal-basic-title",
+    });
   }
 }
