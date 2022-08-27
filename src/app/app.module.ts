@@ -10,6 +10,7 @@ import { ListClientComponent } from "./client/view/list-client/list-client.compo
 import { HttpClientModule } from "@angular/common/http";
 import { RegistrationClientComponent } from "./client/view/registration-client/registration.client.component";
 import { ListProductComponent } from "./product/view/list-product/list-product.component";
+import { RegistrationProductComponent } from "./product/view/registration-product/registration.product.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ListProductComponent } from "./product/view/list-product/list-product.c
     NavbarComponent,
     RegistrationClientComponent,
     ListClientComponent,
-    ListProductComponent
+    ListProductComponent,
+    RegistrationProductComponent
   ],
   imports: [
     BrowserModule,

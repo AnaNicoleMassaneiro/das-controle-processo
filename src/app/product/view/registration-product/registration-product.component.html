@@ -1,0 +1,26 @@
+<div class="regentry">
+
+    <form (ngSubmit)="onSave()">
+        <div class="form-group row">
+            <label for="descricao-input" class="col-2 col-form-label">Nome</label
+    >
+
+    <div class="col-10">
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="regModel.descricao"
+        name="descricao"
+      />
+    </div>
+  </div>
+
+
+
+        <button type="submit" class="btn btn-success" >Salvar</button>
+
+        <button type="submit" class="btn btn-primary" (click)="onCancel()">
+    Cancel
+  </button>
+    </form>
+</div>
