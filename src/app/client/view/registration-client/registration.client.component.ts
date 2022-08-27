@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import { ClientModel } from "src/app/models/client.model";
-import { ClientService } from "src/app/services/client.service";
+import { ClientModel } from "src/app/client/models/client.model";
+import { ClientService } from "src/app/client/services/client.service";
 
 @Component({
   selector: "registration-client",

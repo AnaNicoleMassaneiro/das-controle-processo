@@ -6,18 +6,18 @@ import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { NavbarComponent } from "./navbar/navbar.component";
-import { HomeComponent } from "./home/home.component";
-import { RegistrationClientComponent } from "./client/registration-client/registration.client.component";
-import { ListClientComponent } from "./client/list-client/list-client.component";
+import { ListClientComponent } from "./client/view/list-client/list-client.component";
 import { HttpClientModule } from "@angular/common/http";
+import { RegistrationClientComponent } from "./client/view/registration-client/registration.client.component";
+import { ListProductComponent } from "./product/view/list-product/list-product.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
     RegistrationClientComponent,
     ListClientComponent,
+    ListProductComponent
   ],
   imports: [
     BrowserModule,
