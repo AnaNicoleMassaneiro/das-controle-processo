@@ -111,7 +111,7 @@ export class RegistrationProductComponent implements OnInit {
     this.modalService.open("Sucesso ao Salvar produto", {
       ariaLabelledBy: "modal-basic-title",
     });
-    this.router.navigate(["/list-client"]);
+    this.router.navigate(["/list-product"]);
   }
 
   errorSave() {

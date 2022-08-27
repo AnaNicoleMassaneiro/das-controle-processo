@@ -1,10 +1,8 @@
 <div class="container">
-
-    <br>
     <div>
         <div class="text-right">
             <button type="submit" class="btn btn-primary" (click)="callModal()">
-              Novo Cliente
+                Novo Cliente
             </button>
         </div>
 
@@ -12,40 +10,28 @@
             <thead>
                 <tr>
                     <th>#</th>
-
                     <th>Nome</th>
-
                     <th>Sobrenome</th>
-
                     <th>CPF</th>
-
                     <th></th>
-
                     <th></th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr *ngFor="let registration of registrations; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
-
                     <td>{{ registration.name }}</td>
-
                     <td>{{ registration.sobrenome }}</td>
-
-                    <td>
-                        {{ registration.cpf }}</td>
-
+                    <td>{{ registration.cpf }}</td>
                     <td>
                         <button type="button" class="btn btn-info" (click)="onEdit(registration.id)">
-              Editar
-            </button>
+                            Editar
+                        </button>
                     </td>
-
                     <td>
                         <button type="button" class="btn btn-danger" (click)="onDelete(registration.id)">
-              Excluir
-            </button>
+                            Excluir
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -58,5 +44,5 @@
     </div> -->
     </div>
 
-    <br />
+    <br/>
 </div>
