@@ -2,18 +2,18 @@
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" formControlName="fullname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }" />
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
         </div>
-        <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
-            <div *ngIf="f['fullname'].errors['required']">o campo nome é obrigatório</div>
+        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+            <div *ngIf="f['name'].errors['required']">o campo nome é obrigatório</div>
 
         </div>
 
         <div class="form-group">
             <label>Sobrenome</label>
-            <input type="text" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }" />
-            <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
-                <div *ngIf="f['lastname'].errors['required']">o campo sobrenome é obrigatório</div>
+            <input type="text" formControlName="sobrenome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['sobrenome'].errors }" />
+            <div *ngIf="submitted && f['sobrenome'].errors" class="invalid-feedback">
+                <div *ngIf="f['sobrenome'].errors['required']">o campo sobrenome é obrigatório</div>
             </div>
         </div>
 

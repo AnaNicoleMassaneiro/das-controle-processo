@@ -20,7 +20,6 @@ import {
 export class RegistrationClientComponent implements OnInit {
   closeResult = "";
   public registrations: ClientModel[] = [];
-  public regModel!: ClientModel;
   public showNew: Boolean = false;
   public submitType: string = "Salvar";
   public selectedRow!: number;
@@ -45,8 +44,8 @@ export class RegistrationClientComponent implements OnInit {
 
   initForm() {
     this.formRegister = this.formBuilder.group({
-      fullname: ["", Validators.required],
-      lastname: ["", Validators.required],
+      name: ["", Validators.required],
+      sobrenome: ["", Validators.required],
       cpf: ["", Validators.required],
     });
   }
@@ -82,7 +81,6 @@ export class RegistrationClientComponent implements OnInit {
     if (this.idEdit) {
       this.searchRegistry();
     } else {
-      this.regModel = new ClientModel();
       this.submitType = "Save";
       this.showNew = true;
     }
@@ -91,7 +89,15 @@ export class RegistrationClientComponent implements OnInit {
   searchRegistry() {
     this.clientService.get(this.idEdit).subscribe({
       next: (data) => {
-        this.regModel = data;
+        const { name, sobrenome, cpf } = data;
+
+        this.formRegister = this.formBuilder.group({
+          name: [name, Validators.required],
+          sobrenome: [sobrenome, Validators.required],
+          cpf: [cpf, Validators.required],
+        });
+
+        this.formRegister.setValue({ name, sobrenome, cpf });
       },
       error: (e) => console.error(e),
     });
@@ -104,11 +110,11 @@ export class RegistrationClientComponent implements OnInit {
       return;
     }
 
-    const { fullname, lastname, cpf } = this.formRegister.value;
+    const { name, sobrenome, cpf } = this.formRegister.value;
 
     const data = {
-      name: fullname,
-      sobrenome: lastname,
+      name: name,
+      sobrenome: sobrenome,
       cpf: cpf,
     };
 
@@ -124,11 +130,12 @@ export class RegistrationClientComponent implements OnInit {
   }
 
   editSave() {
+    const { name, sobrenome, cpf } = this.formRegister.value;
+
     const data = {
-      id: this.idEdit,
-      name: this.regModel.name,
-      sobrenome: this.regModel.sobrenome,
-      cpf: this.regModel.cpf,
+      name: name,
+      sobrenome: sobrenome,
+      cpf: cpf,
     };
 
     this.clientService.update(data).subscribe({
