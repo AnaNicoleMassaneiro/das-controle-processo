@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ClientModel } from "src/app/client/models/client.model";
 import { ClientService } from "src/app/client/services/client.service";
 
@@ -16,7 +17,11 @@ export class ListClientComponent implements OnInit {
   public selectedRow!: number;
   public client?: ClientModel[];
 
-  constructor(private router: Router, private clientService: ClientService) {}
+  constructor(
+    private router: Router,
+    private clientService: ClientService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.listClients();
@@ -41,11 +46,23 @@ export class ListClientComponent implements OnInit {
     this.router.navigate(["/registration-client", index]);
   }
 
-  onDelete(index: number) {
+  onDelete(index: number, content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          if (result == "ok") {
+            this.isDelete(index);
+          }
+        },
+        (reason) => {}
+      );
+  }
+
+  isDelete(index: number) {
     this.clientService.delete(index).subscribe({
       next: (res) => {
-        console.log(res);
-        this.router.navigate(["/list-client"]);
+        this.reloadCurrentRoute();
       },
       error: (e) => console.error(e),
     });
@@ -58,4 +75,11 @@ export class ListClientComponent implements OnInit {
   callModal() {
     this.router.navigate(["/registration-client"]);
   }
+
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+}
 }

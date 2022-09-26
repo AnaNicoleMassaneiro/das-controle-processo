@@ -1,5 +1,5 @@
 <div class="register-form">
-    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit(mymodal)">
         <div class="form-group">
             <label>Nome</label>
             <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
@@ -27,9 +27,24 @@
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Cadastrar</button>
-            <button type="button" (click)="onCancel()" class="btn btn-warning float-right">
-        Voltar
-      </button>
+
+            <button type="button" (click)="onCancel()" class="btn btn-warning float-right">    Voltar        </button>
         </div>
     </form>
 </div>
+
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Sucesso</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        Cliente Salvo com Sucesso
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+</ng-template>

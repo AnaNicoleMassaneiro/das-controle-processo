@@ -67,11 +67,11 @@ export class RegistrationClientComponent implements OnInit {
     this.verifyIsNew();
   }
 
-  onSubmit() {
+  onSubmit(content: any) {
     if (this.idEdit) {
-      this.editSave();
+      this.editSave(content);
     } else {
-      this.newSave();
+      this.newSave(content);
     }
 
     this.showNew = false;
@@ -103,7 +103,7 @@ export class RegistrationClientComponent implements OnInit {
     });
   }
 
-  newSave() {
+  newSave(content: any) {
     this.submitted = true;
 
     if (this.formRegister.invalid) {
@@ -120,7 +120,7 @@ export class RegistrationClientComponent implements OnInit {
 
     this.clientService.create(data).subscribe({
       next: (res) => {
-        this.sucessSave();
+        this.sucessSave(content);
       },
       error: (e) => {
         this.errorSave();
@@ -129,7 +129,7 @@ export class RegistrationClientComponent implements OnInit {
     });
   }
 
-  editSave() {
+  editSave(content: any) {
     const { name, sobrenome, cpf } = this.formRegister.value;
 
     const data = {
@@ -140,7 +140,7 @@ export class RegistrationClientComponent implements OnInit {
 
     this.clientService.update(data).subscribe({
       next: (res) => {
-        this.sucessSave();
+        this.sucessSave(content);
         this.message = res.message
           ? res.message
           : "This tutorial was updated successfully!";
@@ -156,15 +156,21 @@ export class RegistrationClientComponent implements OnInit {
     this.location.back();
   }
 
-  sucessSave() {
-    this.modalService.open("Sucesso ao Salvar Cliente", {
-      ariaLabelledBy: "modal-basic-title",
-    });
+  sucessSave(content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {}
+      );
+
     this.router.navigate(["/list-client"]);
   }
 
   errorSave() {
-    this.modalService.open("Erro ao Salvar produto", {
+    this.modalService.open("Erro ao Salvar Cliente", {
       ariaLabelledBy: "modal-basic-title",
     });
   }
