@@ -4,6 +4,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 import { ProductModel } from "src/app/product/models/product.model";
 import { ProductService } from "src/app/product/services/product.service";
+import { Location } from '@angular/common';
 
 @Component({
   selector: "registration-product",
@@ -23,7 +24,8 @@ export class RegistrationProductComponent implements OnInit {
     public productService: ProductService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -104,7 +106,7 @@ export class RegistrationProductComponent implements OnInit {
   }
 
   onCancel() {
-    this.showNew = false;
+    this.location.back();
   }
 
   sucessSave() {

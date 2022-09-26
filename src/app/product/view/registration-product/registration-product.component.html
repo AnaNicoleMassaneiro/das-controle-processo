@@ -1,16 +1,16 @@
 <div class="regentry">
-  <form (ngSubmit)="onSave()">
+    <form (ngSubmit)="onSave()">
 
-    <div class="form-group row col-md-10">
-      <label for="descricao-input" class="col-1 col-form-label">Nome</label>
-      <div class="col-5">
-        <input class="form-control" type="text" [(ngModel)]="regModel.descricao" name="descricao" />
-      </div>
-    </div>
-    <br>
-    <div class="form-group">
-      <button type="submit" class="btn btn-success">Salvar</button> &nbsp;
-      <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancelar</button>
-    </div>
-  </form>
+        <div class="form-group row col-md-10">
+            <label for="descricao-input" class="col-1 col-form-label">Nome</label>
+            <div class="col-5">
+                <input class="form-control" type="text" [(ngModel)]="regModel.descricao" name="descricao" />
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Salvar</button> &nbsp;
+            <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancelar</button>
+        </div>
+    </form>
 </div>

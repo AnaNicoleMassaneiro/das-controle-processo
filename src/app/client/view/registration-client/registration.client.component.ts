@@ -4,10 +4,18 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { ClientModel } from "src/app/client/models/client.model";
 import { ClientService } from "src/app/client/services/client.service";
+import { Location } from "@angular/common";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 
 @Component({
   selector: "registration-client",
   templateUrl: "./registration-client.component.html",
+  styleUrls: ["./registration-client.component.scss"],
 })
 export class RegistrationClientComponent implements OnInit {
   closeResult = "";
@@ -18,16 +26,38 @@ export class RegistrationClientComponent implements OnInit {
   public selectedRow!: number;
   public idEdit!: number;
   public message = "";
+  public formRegister!: FormGroup;
+  submitted = false;
 
   constructor(
     public clientService: ClientService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private location: Location,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
     this.verifyRoute();
+    this.initForm();
+  }
+
+  initForm() {
+    this.formRegister = this.formBuilder.group({
+      fullname: ["", Validators.required],
+      lastname: ["", Validators.required],
+      cpf: ["", Validators.required],
+    });
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.formRegister.controls;
+  }
+
+  onReset(): void {
+    this.submitted = false;
+    this.formRegister.reset();
   }
 
   verifyRoute() {
@@ -38,7 +68,7 @@ export class RegistrationClientComponent implements OnInit {
     this.verifyIsNew();
   }
 
-  onSave() {
+  onSubmit() {
     if (this.idEdit) {
       this.editSave();
     } else {
@@ -68,10 +98,18 @@ export class RegistrationClientComponent implements OnInit {
   }
 
   newSave() {
+    this.submitted = true;
+
+    if (this.formRegister.invalid) {
+      return;
+    }
+
+    const { fullname, lastname, cpf } = this.formRegister.value;
+
     const data = {
-      name: this.regModel.name,
-      sobrenome: this.regModel.sobrenome,
-      cpf: this.regModel.cpf,
+      name: fullname,
+      sobrenome: lastname,
+      cpf: cpf,
     };
 
     this.clientService.create(data).subscribe({
@@ -108,7 +146,7 @@ export class RegistrationClientComponent implements OnInit {
   }
 
   onCancel() {
-    this.showNew = false;
+    this.location.back();
   }
 
   sucessSave() {

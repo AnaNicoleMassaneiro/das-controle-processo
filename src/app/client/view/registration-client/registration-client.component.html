@@ -1,50 +1,35 @@
-<div class="regentry">
-
-  <form (ngSubmit)="onSave()">
-    <div class="form-group row">
-      <label for="firstname-input" class="col-2 col-form-label">Nome</label>
-
-      <div class="col-10">
-        <input class="form-control" type="text" [(ngModel)]="regModel.name" name="firstName" />
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="lastname-input" class="col-2 col-form-label">Sobrenome</label>
-
-      <div class="col-10">
-        <input class="form-control" type="text" [(ngModel)]="regModel.sobrenome" name="lastName" />
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class="form-group row">
-        <label for="cpf-input" class="col-2 col-form-label">CPF</label>
-
-        <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="regModel.cpf" name="cpf" />
+<div class="register-form">
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" formControlName="fullname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }" />
         </div>
-      </div>
-    </div>
+        <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
+            <div *ngIf="f['fullname'].errors['required']">o campo nome é obrigatório</div>
 
+        </div>
 
-    <button type="submit" class="btn btn-success">Salvar</button>
+        <div class="form-group">
+            <label>Sobrenome</label>
+            <input type="text" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }" />
+            <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
+                <div *ngIf="f['lastname'].errors['required']">o campo sobrenome é obrigatório</div>
+            </div>
+        </div>
 
-    <button type="submit" class="btn btn-primary" (click)="onCancel()">
-      Cancel
-    </button>
-  </form>
+        <div class="form-group ">
+            <label>CPF</label>
+            <input type="text" formControlName="cpf" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['cpf'].errors }" />
+            <div *ngIf="submitted && f['cpf'].errors" class="invalid-feedback">
+                <div *ngIf="f['cpf'].errors['required']">o campo cpf é obrigatório</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="button" (click)="onCancel()" class="btn btn-warning float-right">
+        Voltar
+      </button>
+        </div>
+    </form>
 </div>
-
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <p>Hello, World!</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-  </div>
-</ng-template>

@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { ListClientComponent } from "./client/view/list-client/list-client.component";
 import { HttpClientModule } from "@angular/common/http";
@@ -14,6 +14,8 @@ import { RegistrationProductComponent } from "./product/view/registration-produc
 import { ModalComponent } from "./modal/modal.component";
 import { RegistrationOrderComponent } from './order/view/registration-order/registration-order.component';
 import { ListOrderComponent } from './order/view/list-order/list-order.component';
+import { NgxCpfCnpjModule } from "ngx-cpf-cnpj";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -33,6 +35,9 @@ import { ListOrderComponent } from './order/view/list-order/list-order.component
     FormsModule,
     NgbModule,
     HttpClientModule,
+    NgxCpfCnpjModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent],
