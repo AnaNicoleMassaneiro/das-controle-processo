@@ -4,7 +4,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 import { ProductModel } from "src/app/product/models/product.model";
 import { ProductService } from "src/app/product/services/product.service";
-import { Location } from '@angular/common';
+import { Location } from "@angular/common";
 
 @Component({
   selector: "registration-product",
@@ -40,11 +40,11 @@ export class RegistrationProductComponent implements OnInit {
     this.verifyIsNew();
   }
 
-  onSave() {
+  onSave(content: any) {
     if (this.idEdit) {
-      this.editSave();
+      this.editSave(content);
     } else {
-      this.newSave();
+      this.newSave(content);
     }
 
     this.showNew = false;
@@ -69,14 +69,14 @@ export class RegistrationProductComponent implements OnInit {
     });
   }
 
-  newSave() {
+  newSave(content: any) {
     const data = {
       descricao: this.regModel.descricao,
     };
 
     this.productService.create(data).subscribe({
       next: (res) => {
-        this.sucessSave();
+        this.sucessSave(content);
       },
       error: (e) => {
         this.errorSave();
@@ -85,7 +85,7 @@ export class RegistrationProductComponent implements OnInit {
     });
   }
 
-  editSave() {
+  editSave(content: any) {
     const data = {
       id: this.idEdit,
       descricao: this.regModel.descricao,
@@ -93,7 +93,7 @@ export class RegistrationProductComponent implements OnInit {
 
     this.productService.update(data).subscribe({
       next: (res) => {
-        this.sucessSave();
+        this.sucessSave(content);
         this.message = res.message
           ? res.message
           : "This tutorial was updated successfully!";
@@ -109,10 +109,16 @@ export class RegistrationProductComponent implements OnInit {
     this.location.back();
   }
 
-  sucessSave() {
-    this.modalService.open("Sucesso ao Salvar produto", {
-      ariaLabelledBy: "modal-basic-title",
-    });
+  sucessSave(content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {}
+      );
+
     this.router.navigate(["/list-product"]);
   }
 

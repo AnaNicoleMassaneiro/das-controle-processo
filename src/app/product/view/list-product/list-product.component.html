@@ -39,9 +39,9 @@
                     </td>
 
                     <td>
-                        <button type="button" class="btn btn-danger" (click)="onDelete(registration.id)">
-              Excluir
-            </button>
+                        <button type="button" class="btn btn-danger" (click)="onDelete(registration.id, mymodal)">
+                        Excluir
+                    </button>
                     </td>
                 </tr>
             </tbody>
@@ -50,3 +50,19 @@
 
     <br />
 </div>
+
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">×</span>
+  </button>
+    </div>
+    <div class="modal-body">
+        Tem certeza que deseja excluir esse registro?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('ok')">Sim</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel click')">Não</button>
+    </div>
+</ng-template>

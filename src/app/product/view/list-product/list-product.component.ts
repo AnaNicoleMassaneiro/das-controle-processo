@@ -20,6 +20,7 @@ export class ListProductComponent implements OnInit {
   constructor(
     private router: Router,
     private productService: ProductService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -45,11 +46,23 @@ export class ListProductComponent implements OnInit {
     this.router.navigate(["/registration-product", index]);
   }
 
-  onDelete(index: number) {
+  onDelete(index: number, content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          if (result == "ok") {
+            this.isDelete(index);
+          }
+        },
+        (reason) => {}
+      );
+  }
+
+  isDelete(index: number) {
     this.productService.delete(index).subscribe({
       next: (res) => {
-        console.log(res);
-        this.router.navigate(["/list-product"]);
+        this.reloadCurrentRoute();
       },
       error: (e) => console.error(e),
     });
@@ -63,5 +76,10 @@ export class ListProductComponent implements OnInit {
     this.router.navigate(["/registration-product"]);
   }
 
-
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
 }
