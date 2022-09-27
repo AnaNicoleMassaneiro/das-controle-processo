@@ -12,14 +12,9 @@
             <thead>
                 <tr>
                     <th>#</th>
-
                     <th>Id</th>
-
                     <th>Descrição</th>
-
-
                     <th></th>
-
                     <th></th>
                 </tr>
             </thead>
@@ -27,11 +22,8 @@
             <tbody>
                 <tr *ngFor="let registration of registrations; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
-
                     <td>{{ registration.id }}</td>
-
                     <td>{{ registration.descricao }}</td>
-
                     <td>
                         <button type="button" class="btn btn-info" (click)="onEdit(registration.id)">
               Editar

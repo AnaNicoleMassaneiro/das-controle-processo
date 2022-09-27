@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { ProductModel } from "../models/product.model";
 
 const baseUrl = "https://das-controle-de-projeto.herokuapp.com/product";
+//const baseUrl = "http://localhost:8080/product";
 
 @Injectable({
   providedIn: "root",

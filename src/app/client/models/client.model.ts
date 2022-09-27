@@ -1,6 +1,6 @@
 export class ClientModel {
   id?: any;
-  name?: string;
-  sobrenome?: string;
-  cpf?: string;
+  name!: string;
+  sobrenome!: string;
+  cpf!: string;
 }
