@@ -21,14 +21,14 @@ export class ListOrderComponent implements OnInit {
   public cpf = "";
   public cpfClient = "";
   public formSearch!: FormGroup;
-  submitted = false;
+  public submitted = false;
   public registrations: ProductModel[] = [];
 
   constructor(
     private clientService: ClientService,
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    private modalService: NgbModal,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -40,10 +40,14 @@ export class ListOrderComponent implements OnInit {
     this.productService.getAll().subscribe({
       next: (data) => {
         this.registrations = data;
-      },
-      error: (e) => {
 
+        this.registrations.forEach((a) => {
+          a.isSelected = false;
+        });
+
+        console.log(this.registrations);
       },
+      error: (e) => {},
     });
   }
 
@@ -73,6 +77,18 @@ export class ListOrderComponent implements OnInit {
         this.errorSave();
       },
     });
+  }
+
+  getCheckbox(id: any) {
+    console.log(id);
+
+    this.registrations.forEach((a) => {
+      if (a.id == id) {
+        a.isSelected = !a.isSelected;
+      }
+    });
+
+    console.log(this.registrations);
   }
 
   errorSave() {

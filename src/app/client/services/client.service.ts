@@ -3,8 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ClientModel } from "../models/client.model";
 
-const baseUrl = "https://das-controle-de-projeto.herokuapp.com/client";
-//const baseUrl = "http://localhost:8080/client";
+//const baseUrl = "https://das-controle-de-projeto.herokuapp.com/client";
+const baseUrl = "http://localhost:8080/client";
 
 
 @Injectable({
@@ -18,7 +18,7 @@ export class ClientService {
   }
 
   get(id: any): Observable<ClientModel> {
-    return this.http.get<ClientModel>(`${baseUrl}/${id}`);
+    return this.http.get<ClientModel>(`${baseUrl}/search/${id}`);
   }
 
   create(data: any): Observable<any> {

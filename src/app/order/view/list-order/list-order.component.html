@@ -10,7 +10,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" (click)="searchClient(cpf)" class=" btn btn-primary ">Buscar</button>
+            <button type="submit" class=" btn btn-primary ">Buscar</button>
         </div>
     </form>
 </div>
@@ -26,30 +26,37 @@
     </div>
 
     Selecione Os Produtos:
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Id</th>
-                <th>Descrição</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
+    <br>
 
-        <tbody>
-            <tr *ngFor="let registration of registrations; let i = index">
-                <th scope="row">
-                    <!-- Default unchecked -->
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="tableDefaultCheck2" checked>
-                        <label class="custom-control-label" for="tableDefaultCheck2">Check 2</label>
-                    </div>
-                </th>
-                <td>{{ registration.id }}</td>
-                <td>{{ registration.descricao }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id Produto</th>
+                            <th scope="col">Nome Do Produto</th>
+                            <th scope="col">Quantidade</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let registration of registrations; let i = index">
+                            <td>
+                                <div class="custom-control custom-checkbox">
+                                    <input [checked]="registration.isSelected" type="checkbox" (change)="getCheckbox(registration.id)" class="custom-control-input" [id]="registration.id">
+                                    <label class="custom-control-label" [for]="registration.id">{{ registration.id }}</label>
+                                </div>
+                            </td>
+                            <td>{{ registration.descricao }}</td>
+                            <td><input type="number" *ngIf="registration.isSelected"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" class=" btn btn-primary ">Enviar Lista</button>
+
+            </div>
+        </div>
+
+    </div>

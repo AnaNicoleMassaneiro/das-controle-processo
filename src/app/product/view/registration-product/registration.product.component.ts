@@ -5,10 +5,17 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ProductModel } from "src/app/product/models/product.model";
 import { ProductService } from "src/app/product/services/product.service";
 import { Location } from "@angular/common";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 
 @Component({
   selector: "registration-product",
   templateUrl: "./registration-product.component.html",
+  styleUrls: ["./registration-product.component.scss"],
 })
 export class RegistrationProductComponent implements OnInit {
   closeResult = "";
@@ -19,17 +26,27 @@ export class RegistrationProductComponent implements OnInit {
   public selectedRow!: number;
   public idEdit!: number;
   public message = "";
+  public formRegister!: FormGroup;
+  submitted = false;
 
   constructor(
     public productService: ProductService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
     this.verifyRoute();
+    this.initForm();
+  }
+
+  initForm() {
+    this.formRegister = this.formBuilder.group({
+      descricao: ["", Validators.required],
+    });
   }
 
   verifyRoute() {
@@ -40,7 +57,11 @@ export class RegistrationProductComponent implements OnInit {
     this.verifyIsNew();
   }
 
-  onSave(content: any) {
+  get f(): { [key: string]: AbstractControl } {
+    return this.formRegister.controls;
+  }
+
+  onSubmit(content: any) {
     if (this.idEdit) {
       this.editSave(content);
     } else {
@@ -54,7 +75,6 @@ export class RegistrationProductComponent implements OnInit {
     if (this.idEdit) {
       this.searchRegistry();
     } else {
-      this.regModel = new ProductModel();
       this.submitType = "Save";
       this.showNew = true;
     }
@@ -63,15 +83,29 @@ export class RegistrationProductComponent implements OnInit {
   searchRegistry() {
     this.productService.get(this.idEdit).subscribe({
       next: (data) => {
-        this.regModel = data;
+        const { descricao } = data;
+
+        this.formRegister = this.formBuilder.group({
+          descricao: [descricao, Validators.required],
+        });
+
+        this.formRegister.setValue({ descricao });
       },
       error: (e) => console.error(e),
     });
   }
 
   newSave(content: any) {
+    this.submitted = true;
+
+    if (this.formRegister.invalid) {
+      return;
+    }
+
+    const { descricao } = this.formRegister.value;
+
     const data = {
-      descricao: this.regModel.descricao,
+      descricao: descricao,
     };
 
     this.productService.create(data).subscribe({
@@ -86,9 +120,11 @@ export class RegistrationProductComponent implements OnInit {
   }
 
   editSave(content: any) {
+    const { descricao } = this.formRegister.value;
+
     const data = {
+      descricao: descricao,
       id: this.idEdit,
-      descricao: this.regModel.descricao,
     };
 
     this.productService.update(data).subscribe({
@@ -100,7 +136,6 @@ export class RegistrationProductComponent implements OnInit {
       },
       error: (e) => {
         console.error(e);
-        this.errorSave();
       },
     });
   }

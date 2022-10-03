@@ -146,7 +146,6 @@ export class RegistrationClientComponent implements OnInit {
           : "This tutorial was updated successfully!";
       },
       error: (e) => {
-        this.errorSave();
         console.error(e);
       },
     });
