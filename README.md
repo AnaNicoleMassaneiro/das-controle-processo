@@ -39,7 +39,7 @@ Pasta
 
 
 5. Considere as seguintes tabelas do banco de dados:
- <img src="./src/assets/diagrama.png" width="100"/>
+ <img src="./src/assets/diagrama.png"  alt="J" width="100"/>
 
 
 
