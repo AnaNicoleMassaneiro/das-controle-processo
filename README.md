@@ -1,8 +1,9 @@
 # Pós-graduação em desenvolvimento ágil de software
-DAS - Trabalho Desenvolvimento Web 
+
+DAS - Trabalho Desenvolvimento Web
 
 Com base no diagrama de classes abaixo, construa um sistema para controlar o processo de pedido de produtos.
- <img src="./src/assets/diagramaDeCl.png" width="100"/>
+<img src="./src/assets/diagramaDeCl.png" alt="J" width="700"/>
 
 O sistema tem os seguintes requisitos:
 
@@ -36,24 +37,21 @@ Caneta esferográfica azul
 Pasta
 2
 
-
-
 5. Considere as seguintes tabelas do banco de dados:
- <img src="./src/assets/diagrama.png"  alt="J" width="500"/>
-
-
+   <img src="./src/assets/diagrama.png"  alt="J" width="700"/>
 
 O programa acima deve utilizar as seguintes tecnologias:
 
 - HTML/CSS/Javascript/DOM
 - Angular
-- Servidor rodando uma API REST em Spring 
+- Servidor rodando uma API REST em Spring
 - É permitido o uso de frameworks adicionais
 - Não é permitido o uso de frameworks geradores de código, como por exemplo, Spring Roo
 
 Elemento de Pesquisa:
 
-	- Espera-se que a equipe consiga montar uma API REST simples em Spring
+    - Espera-se que a equipe consiga montar uma API REST simples em Spring
+
 - O servidor pode rodar localmente
 - Tutoriais e vídeos estão disponibilizados na página: http://www.razer.net.br/angular
 
