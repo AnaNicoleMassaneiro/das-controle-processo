@@ -2,7 +2,7 @@
 DAS - Trabalho Desenvolvimento Web 
 
 Com base no diagrama de classes abaixo, construa um sistema para controlar o processo de pedido de produtos.
- <img src="../das-controle-processo/src/assets/diagramaDeCl.png" alt="J" width="100"/>
+ <img src="../das-controle-processo/src/assets/diagramaDeCl.png" width="100"/>
 
 O sistema tem os seguintes requisitos:
 
@@ -39,7 +39,7 @@ Pasta
 
 
 5. Considere as seguintes tabelas do banco de dados:
- <img src="../das-controle-processo/src/assets/diagrama.png" alt="J" width="100"/>
+ <img src="../das-controle-processo/src/assets/diagrama.png" width="100"/>
 
 
 
