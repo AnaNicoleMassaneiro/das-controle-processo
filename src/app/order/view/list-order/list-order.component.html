@@ -39,12 +39,13 @@
 
         <tbody>
             <tr *ngFor="let registration of registrations; let i = index">
-                <td>
+                <th scope="row">
+                    <!-- Default unchecked -->
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                        <label class="custom-control-label" for="customCheck1">1</label>
+                        <input type="checkbox" class="custom-control-input" id="tableDefaultCheck2" checked>
+                        <label class="custom-control-label" for="tableDefaultCheck2">Check 2</label>
                     </div>
-                </td>
+                </th>
                 <td>{{ registration.id }}</td>
                 <td>{{ registration.descricao }}</td>
             </tr>

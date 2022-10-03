@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ClientModel } from "src/app/client/models/client.model";
 import { ClientService } from "src/app/client/services/client.service";
 import { ProductModel } from "src/app/product/models/product.model";
@@ -27,6 +28,7 @@ export class ListOrderComponent implements OnInit {
     private clientService: ClientService,
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private modalService: NgbModal,
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +41,9 @@ export class ListOrderComponent implements OnInit {
       next: (data) => {
         this.registrations = data;
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+
+      },
     });
   }
 
@@ -65,7 +69,15 @@ export class ListOrderComponent implements OnInit {
         this.name = data.name + data.sobrenome;
         this.cpf = data.cpf;
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        this.errorSave();
+      },
+    });
+  }
+
+  errorSave() {
+    this.modalService.open("Cliente não encontrado", {
+      ariaLabelledBy: "modal-basic-title",
     });
   }
 }
