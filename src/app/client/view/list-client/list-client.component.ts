@@ -78,8 +78,12 @@ export class ListClientComponent implements OnInit {
 
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
     });
-}
+  }
+
+  viewProductToClient() {
+    this.router.navigate(["/client-to-product"]);
+  }
 }
