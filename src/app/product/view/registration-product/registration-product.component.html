@@ -1,7 +1,9 @@
 <div class="register-form">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit(mymodal)">
+        <h5>Cadastro de roduto</h5>
+        <hr>        
         <div class="form-group ">
-            <label>Nome Do Produto</label>
+            <label>Nome</label>
             <input type="text " formControlName="descricao" class="form-control " [ngClass]="{ 'is-invalid': submitted && f[ 'descricao'].errors } " />
         </div>
         <div *ngIf="submitted && f[ 'descricao'].errors " class="invalid-feedback ">
@@ -9,7 +11,7 @@
 
         </div>
         <button type="submit " class="btn btn-success ">Salvar</button>
-        <button type="button " (click)="onCancel() " class="btn btn-primary float-right ">    Voltar        </button>
+        <button type="button " (click)="onCancel() " class="btn btn-dark float-right ">    Voltar        </button>
     </form>
 </div>
 

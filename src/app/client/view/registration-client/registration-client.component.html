@@ -1,5 +1,7 @@
 <div class="register-form">
     <form [formGroup]="formRegister" (ngSubmit)="onSubmit(mymodal)">
+        <h5>Cadastro de cliente</h5>
+        <hr>
         <div class="form-group ">
             <label>Nome</label>
             <input type="text " formControlName="name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f[ 'name'].errors } " />
@@ -27,11 +29,10 @@
 
         <div class="form-group ">
             <button type="submit " class="btn btn-success ">Salvar</button>
-            <button type="button " (click)="onCancel() " class="btn btn-primary float-right ">    Voltar        </button>
+            <button type="button " (click)="onCancel() " class="btn btn-dark float-right ">    Voltar        </button>
         </div>
     </form>
 </div>
-
 
 <ng-template #mymodal let-modal>
     <div class="modal-header ">

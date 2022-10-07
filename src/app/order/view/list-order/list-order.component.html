@@ -6,9 +6,7 @@
         </div>
         <div *ngIf=" f['cpfClient'].errors" class="invalid-feedback">
             <div *ngIf="f['cpfClient'].errors['required']">o campo cpf é obrigatório</div>
-
         </div>
-
         <div class="form-group">
             <button type="submit" class=" btn btn-primary ">Buscar</button>
         </div>
@@ -18,17 +16,15 @@
 <div *ngIf="name" class="container ">
     <div class="row ">
         <div class="col-sm ">
-            Nome: {{name}}
+            <b>Nome:</b> {{name}}
         </div>
         <div class="col-sm ">
-            CPF: {{cpf}}
+            <b>CPF:</b> {{cpf}}
         </div>
     </div>
 
-    Selecione Os Produtos:
+    Selecione os produtos:
     <br>
-
-
 
     <div class="container">
         <div class="row">
@@ -36,8 +32,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Id Produto</th>
-                            <th scope="col">Nome Do Produto</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nome</th>
                             <th scope="col">Quantidade</th>
                     </thead>
                     <tbody>
@@ -53,10 +49,7 @@
                         </tr>
                     </tbody>
                 </table>
-
                 <button type="button" class=" btn btn-primary ">Enviar Lista</button>
-
             </div>
         </div>
-
     </div>
