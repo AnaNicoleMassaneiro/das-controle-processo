@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";
@@ -10,6 +11,9 @@ import { ClientModel } from "src/app/client/models/client.model";
 import { ClientService } from "src/app/client/services/client.service";
 import { ProductModel } from "src/app/product/models/product.model";
 import { ProductService } from "src/app/product/services/product.service";
+import { Order } from "../../models/order.model";
+import { OrderService } from "../../services/order.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-list-order",
@@ -23,12 +27,16 @@ export class ListOrderComponent implements OnInit {
   public formSearch!: FormGroup;
   public submitted = false;
   public registrations: ProductModel[] = [];
+  public idClient!: number;
+  public closeResult = "";
 
   constructor(
     private clientService: ClientService,
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public orderService: OrderService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +80,7 @@ export class ListOrderComponent implements OnInit {
       next: (data: ClientModel) => {
         this.name = data.name + data.sobrenome;
         this.cpf = data.cpf;
+        this.idClient = data.id;
       },
       error: (e) => {
         this.errorSave();
@@ -87,13 +96,57 @@ export class ListOrderComponent implements OnInit {
         a.isSelected = !a.isSelected;
       }
     });
-
-    console.log(this.registrations);
   }
 
   errorSave() {
     this.modalService.open("Cliente não encontrado", {
       ariaLabelledBy: "modal-basic-title",
     });
+  }
+
+  sendListOrder(content: any) {
+    this.submitted = true;
+    let env: Order[] = [];
+
+    if (this.formSearch.invalid) {
+      return;
+    }
+
+    this.registrations.forEach((element) => {
+      if (element.isSelected) {
+        const teste = document.getElementById(element.id)?.ATTRIBUTE_NODE;
+
+        const data: Order = {
+          idClient: this.idClient,
+          qtd: teste,
+          idProduct: element.id,
+        };
+
+        env.push(data);
+      }
+    });
+
+    this.orderService.create(env).subscribe({
+      next: (res) => {
+        this.sucessSave(content);
+      },
+      error: (e) => {
+        this.errorSave();
+        console.error(e);
+      },
+    });
+  }
+
+  sucessSave(content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {}
+      );
+
+    this.router.navigate(["/list-order"]);
   }
 }
