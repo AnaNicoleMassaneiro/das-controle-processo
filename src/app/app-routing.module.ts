@@ -6,7 +6,6 @@ import { RegistrationClientComponent } from "./client/view/registration-client/r
 import { ListProductComponent } from "./product/view/list-product/list-product.component";
 import { RegistrationProductComponent } from "./product/view/registration-product/registration.product.component";
 import { ListOrderComponent } from "./order/view/list-order/list-order.component";
-import { ViewClientToProdutComponent } from "./client/view/view-client-to-produt/view-client-to-produt.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -17,7 +16,6 @@ const routes: Routes = [
   { path: "registration-product", component: RegistrationProductComponent },
   { path: "registration-product/:id", component: RegistrationProductComponent },
   { path: "list-order", component: ListOrderComponent },
-  { path: "client-to-product", component: ViewClientToProdutComponent },
 ];
 
 @NgModule({

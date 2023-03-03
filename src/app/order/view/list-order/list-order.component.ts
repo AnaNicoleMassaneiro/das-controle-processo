@@ -27,8 +27,11 @@ export class ListOrderComponent implements OnInit {
   public formSearch!: FormGroup;
   public submitted = false;
   public registrations: ProductModel[] = [];
-  public idClient!: number;
+  public id_client!: number;
   public closeResult = "";
+  public clientRequest: boolean = false;
+  public verifyRequest: boolean = false;
+  public listRequest: undefined;
 
   constructor(
     private clientService: ClientService,
@@ -80,7 +83,7 @@ export class ListOrderComponent implements OnInit {
       next: (data: ClientModel) => {
         this.name = data.name + data.sobrenome;
         this.cpf = data.cpf;
-        this.idClient = data.id;
+        this.id_client = data.id;
       },
       error: (e) => {
         this.errorSave();
@@ -117,9 +120,9 @@ export class ListOrderComponent implements OnInit {
         const teste = document.getElementById(element.id)?.ATTRIBUTE_NODE;
 
         const data: Order = {
-          idClient: this.idClient,
+          id_client: this.id_client,
           qtd: teste,
-          idProduct: element.id,
+          id_product: element.id,
         };
 
         env.push(data);
@@ -148,5 +151,23 @@ export class ListOrderComponent implements OnInit {
       );
 
     this.router.navigate(["/list-order"]);
+  }
+
+  addResquestClient() {
+    this.verifyRequest = false;
+    this.clientRequest = !this.clientRequest;
+  }
+
+  verifyResquestClient() {
+    this.verifyRequest = !this.verifyRequest;
+    this.clientRequest = false;
+
+    this.orderService.findById(this.id_client).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.listRequest = data;
+      },
+      error: (e) => console.error(e),
+    });
   }
 }

@@ -41,7 +41,7 @@ export class ClientService {
     return this.http.get<ClientModel[]>(`${baseUrl}?title=${title}`);
   }
 
-  findByCpf(cpf: string): Observable<ClientModel> {
-    return this.http.get<ClientModel>(`${baseUrl}/${cpf}`);
-  }
+    findByCpf(cpf: string): Observable<ClientModel> {
+      return this.http.get<ClientModel>(`${baseUrl}/${cpf}`);
+    }
 }

@@ -1,7 +1,7 @@
 export class Order {
     id?: any;
     data?: string;
-    idClient?: any;
+    id_client?: any;
     qtd?: any;
-    idProduct?: any;
+    id_product?: any;
 }

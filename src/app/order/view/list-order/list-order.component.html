@@ -13,7 +13,7 @@
     </form>
 </div>
 
-<div *ngIf="name" class="container ">
+<div *ngIf="name" class="container">
     <div class="row ">
         <div class="col-sm ">
             <b>Nome:</b> {{name}}
@@ -23,9 +23,43 @@
         </div>
     </div>
 
-    <hr>
-    <h5>Selecione os produtos:</h5>
+    <div>
+        <div class="form-group">
+            <button type="submit" class=" btn btn-secondary text-center" (click)=verifyResquestClient()>Verificar pedidos desse cliente</button>
+            <button type="submit" class=" btn btn-info " (click)=addResquestClient()>Adicionar pedidos para este cliente</button>
 
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="verifyRequest" class="container">
+
+
+    <h5>Lista de produtos</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Descrição do Produto</th>
+                <th>Quantidade</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let t of listRequest; let i = index">
+                <td>{{ t[0] }}</td>
+                <td>{{ t[4] }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div *ngIf="clientRequest" class="container">
+    <h5>Selecione os produtos:</h5>
     <div class="container">
         <div class="row">
             <div class="col-12">
