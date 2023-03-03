@@ -3,8 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ClientModel } from "../models/client.model";
 
-const baseUrl = "https://das-controle-de-projeto.herokuapp.com/client";
-//const baseUrl = "http://localhost:8080/client";
+//const baseUrl = "https://das-controle-de-projeto.herokuapp.com/client";
+const baseUrl = "http://localhost:8080/client";
 
 
 @Injectable({
@@ -41,7 +41,7 @@ export class ClientService {
     return this.http.get<ClientModel[]>(`${baseUrl}?title=${title}`);
   }
 
-  findByCpf(cpf: string): Observable<ClientModel> {
-    return this.http.get<ClientModel>(`${baseUrl}/${cpf}`);
-  }
+    findByCpf(cpf: string): Observable<ClientModel> {
+      return this.http.get<ClientModel>(`${baseUrl}/${cpf}`);
+    }
 }

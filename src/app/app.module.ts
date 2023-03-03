@@ -16,7 +16,6 @@ import { ListOrderComponent } from './order/view/list-order/list-order.component
 import { NgxCpfCnpjModule } from "ngx-cpf-cnpj";
 import { CommonModule } from "@angular/common";
 import { ModalComponent } from "./modal/modal.component";
-import { ViewClientToProdutComponent } from './client/view/view-client-to-produt/view-client-to-produt.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { HomeComponent } from './home/home.component';
     ModalComponent,
     RegistrationOrderComponent,
     ListOrderComponent,
-    ViewClientToProdutComponent,
     HomeComponent,
   ],
   imports: [

@@ -13,7 +13,7 @@
     </form>
 </div>
 
-<div *ngIf="name" class="container ">
+<div *ngIf="name" class="container">
     <div class="row ">
         <div class="col-sm ">
             <b>Nome:</b> {{name}}
@@ -21,11 +21,45 @@
         <div class="col-sm ">
             <b>CPF:</b> {{cpf}}
         </div>
-    </div>    
-    
-    <hr>    
-    <h5>Selecione os produtos:</h5>
+    </div>
 
+    <div>
+        <div class="form-group">
+            <button type="submit" class=" btn btn-secondary text-center" (click)=verifyResquestClient()>Verificar pedidos desse cliente</button>
+            <button type="submit" class=" btn btn-info " (click)=addResquestClient()>Adicionar pedidos para este cliente</button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="verifyRequest" class="container">
+
+
+    <h5>Lista de produtos</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Descrição do Produto</th>
+                <th>Quantidade</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let t of listRequest; let i = index">
+                <td>{{ t[0] }}</td>
+                <td>{{ t[4] }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div *ngIf="clientRequest" class="container">
+    <h5>Selecione os produtos:</h5>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -45,11 +79,28 @@
                                 </div>
                             </td>
                             <td>{{ registration.descricao }}</td>
-                            <td><input type="number" *ngIf="registration.isSelected"></td>
+                            <td>
+                                <input NgModel="registration.id" type="number" *ngIf="registration.isSelected">
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-success">Enviar Lista</button>
+                <button (click)="sendListOrder(mymodal) " type="button " class="btn btn-success ">Enviar Lista</button>
             </div>
         </div>
     </div>
+
+    <ng-template #mymodal let-modal>
+        <div class="modal-header ">
+            <h4 class="modal-title " id="modal-basic-title ">Sucesso</h4>
+            <button type="button " class="close " aria-label="Close " (click)="modal.dismiss( 'Cross click') ">
+    <span aria-hidden="true ">×</span>
+  </button>
+        </div>
+        <div class="modal-body ">
+            Pedido Salvo com Sucesso
+        </div>
+        <div class="modal-footer ">
+            <button type="button " class="btn btn-outline-dark " (click)="modal.close( 'Save click') ">Ok</button>
+        </div>
+    </ng-template>
