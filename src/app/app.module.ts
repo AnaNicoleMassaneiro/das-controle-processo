@@ -17,6 +17,7 @@ import { NgxCpfCnpjModule } from "ngx-cpf-cnpj";
 import { CommonModule } from "@angular/common";
 import { ModalComponent } from "./modal/modal.component";
 import { HomeComponent } from './home/home.component';
+import { CpfPipe } from "./utils/validation.ts/cpf.pipe";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HomeComponent } from './home/home.component';
     RegistrationOrderComponent,
     ListOrderComponent,
     HomeComponent,
+    CpfPipe,
   ],
   imports: [
     BrowserModule,

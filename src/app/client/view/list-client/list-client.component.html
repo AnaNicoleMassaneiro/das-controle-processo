@@ -6,7 +6,7 @@
             </button>
         </div>
         <br>
-        <h5>Lista de clientes</h5>        
+        <h5>Lista de clientes</h5>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -16,7 +16,6 @@
                     <th>CPF</th>
                     <th></th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +23,7 @@
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ registration.name }}</td>
                     <td>{{ registration.sobrenome }}</td>
-                    <td>{{ registration.cpf }}</td>
+                    <td>{{ registration.cpf | cpf }}</td>
                     <td>
                         <button type="button" class="btn btn-info" (click)="onEdit(registration.id)">
                             Editar
@@ -36,9 +35,7 @@
                         </button>
                     </td>
 
-                    <td>
-                        <button type="button " (click)="viewProductToClient()" class="btn btn-primary ">Visualizar Produtos</button>
-                    </td>
+
                 </tr>
             </tbody>
         </table>
